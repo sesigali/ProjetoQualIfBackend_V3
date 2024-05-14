@@ -21,9 +21,9 @@ app.use("/compromisso", require("./controllers/compromissoController.js"))
 app.use("/empresa", require("./controllers/empresaController.js"))
 app.use("/indice", require("./controllers/indiceController.js"))
 app.use("/relatorio", require("./controllers/relatorioController.js"))
+app.use("/usuario", require("./controllers/usuarioController.js"))
 
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`)
 })
-

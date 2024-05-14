@@ -18,16 +18,17 @@ router.get('/ultimoCadastro', async (req, res) => {
 //Cadastrar Empresa
 router.post('/adicionar', async (req, res) => {
     try {
-        const { razaoSocial, cnpj, contatoEmpresa, tipoServico, valorEstimadoContrato } = req.body;
+        const { razaoSocial, cnpj, contatoEmpresa, tipoServico, valorEstimadoContrato, idUsuario } = req.body;
 
-        if (razaoSocial && cnpj && contatoEmpresa && tipoServico && valorEstimadoContrato) {
+        if (razaoSocial && cnpj && contatoEmpresa && tipoServico && valorEstimadoContrato && idUsuario ) {
             await Empresa.sync();
             const empresaEntity = await Empresa.create({
                 razaoSocial,
                 cnpj,
                 contatoEmpresa,
                 tipoServico,
-                valorEstimadoContrato
+                valorEstimadoContrato,
+                idUsuario
             });
             res.status(201).json(empresaEntity);
         } else {
@@ -80,14 +81,15 @@ router.put('/editar/:id', async (req, res) => {
     try {
         const { razaoSocial, cnpj, contatoEmpresa, tipoServico, valorEstimadoContrato } = req.body;
 
-        if (razaoSocial && cnpj && contatoEmpresa && tipoServico && valorEstimadoContrato) {
+        if (razaoSocial && cnpj && contatoEmpresa && tipoServico && valorEstimadoContrato && idUsuario != null) {
             await Empresa.sync();
             await Empresa.update({
                 razaoSocial,
                 cnpj,
                 contatoEmpresa,
                 tipoServico,
-                valorEstimadoContrato
+                valorEstimadoContrato,
+                idUsuario
             }, {
                 where: { idEmpresa: req.params.id }
             });

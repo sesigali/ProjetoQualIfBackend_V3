@@ -28,6 +28,14 @@ const Empresa = db.define("empresa", {
         type: Sequelize.DOUBLE,
         allowNull: true
     },
+    idUsuario: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'usuarios', // Nome da tabela de referência (deve coincidir com o nome da tabela no banco de dados)
+            key: 'idUsuario' // Nome da coluna na tabela de referência
+        }
+    }
 });
 
 module.exports = Empresa;

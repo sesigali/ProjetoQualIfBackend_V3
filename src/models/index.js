@@ -7,6 +7,7 @@ const Compromisso = require("./compromissoModel");
 const Indice = require("./indiceModel");
 //const PatrimonioLiquido = require("./patrimonioLiqModel");
 const Relatorio = require("./relatorioModel");
+const Usuario = require("./usuarioModel");
 
 // Relatorio pertence a uma Empresa
 Relatorio.belongsTo(Empresa, { foreignKey: "idEmpresa" });
@@ -19,6 +20,9 @@ Empresa.hasOne(Compromisso, { foreignKey: "idEmpresa" });
 Empresa.hasOne(Indice, { foreignKey: "idEmpresa" });
 //Empresa.hasOne(PatrimonioLiquido, { foreignKey: "idEmpresa" });
 
+// Empresa pertence a um usuario
+Empresa.belongsTo(Usuario, { foreignKey: 'idUsuario' });
+
 //sequelize.sync();
 
-module.exports = {Empresa, Relatorio, Balanco, Certidao, Complementacao, Compromisso, Indice};
+module.exports = {Empresa, Relatorio, Balanco, Certidao, Complementacao, Compromisso, Indice, Usuario};

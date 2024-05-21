@@ -18,7 +18,8 @@ router.post('/adicionar', async (req, res) => {
             res.status(422).json({ Erro: "Parâmetros faltando!" });
         }
     } catch (e) {
-        res.status(500).json({ Erro: "Erro no servidor!" });
+        res.status(500).json({ Erro: "Usuário já cadastrado!" });
+        
     }
 });
 

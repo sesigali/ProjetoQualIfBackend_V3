@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../db/db.js");
+const bcrypt = require('bcrypt');
 
 const Usuario = db.define("usuario", {
     idUsuario: {
@@ -16,6 +17,13 @@ const Usuario = db.define("usuario", {
     senha: {
         type: Sequelize.STRING,
         allowNull: false
+    }
+}, {
+    hooks: {
+        beforeCreate: async (usuario) => {
+            const salt = await bcrypt.genSalt(10);
+            usuario.senha = await bcrypt.hash(usuario.senha, salt);
+        }
     }
 });
 

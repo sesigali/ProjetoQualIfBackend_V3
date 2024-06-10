@@ -48,6 +48,19 @@ router.get('/listarindice/:id', async (req, res) => {
     }
 });
 
+// Listar todos indices de uma empresa por ID da empresa
+router.get('/listarindices/:idEmpresa', async (req, res) => {
+    try {
+        await Indice.sync();
+        const indiceEntity = await Indice.findOne({
+            where: { idEmpresa: req.params.idEmpresa }
+        });
+        res.json(indiceEntity);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+
 //Excluir um Índice por ID
 router.delete('/excluir/:id', async (req, res) => {
     try {

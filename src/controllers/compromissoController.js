@@ -38,6 +38,19 @@ router.get('/listarcompromisso/:id', async (req, res) => {
     }
 });
 
+// Listar todos compromissos de uma empresa por ID da empresa
+router.get('/listarcompromissos/:idEmpresa', async (req, res) => {
+    try {
+        await Compromisso.sync();
+        const compromissoEntity = await Compromisso.findOne({
+            where: { idEmpresa: req.params.idEmpresa }
+        });
+        res.json(compromissoEntity);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+
 //Excluir um Compromisso por ID
 router.delete('/excluir/:id', async (req, res) => {
     try {

@@ -35,6 +35,19 @@ router.get('/listarcomplementacao/:id', async (req, res) => {
     }
 });
 
+// Listar todos complementacoes de uma empresa por ID da empresa
+router.get('/listarcomplementacoes/:idEmpresa', async (req, res) => {
+    try {
+        await Complementacao.sync();
+        const complementacaoEntity = await Complementacao.findOne({
+            where: { idEmpresa: req.params.idEmpresa }
+        });
+        res.json(complementacaoEntity);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+
 //Excluir uma Complementacao por ID
 router.delete('/excluir/:id', async (req, res) => {
     try {

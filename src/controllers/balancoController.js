@@ -36,6 +36,19 @@ router.get('/listarbalanco/:id', async (req, res) => {
     }
 });
 
+// Listar todos balancos de uma empresa por ID da empresa
+router.get('/listarbalancos/:idEmpresa', async (req, res) => {
+    try {
+        await Balanco.sync();
+        const balancoEntity = await Balanco.findOne({
+            where: { idEmpresa: req.params.idEmpresa }
+        });
+        res.json(balancoEntity);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+
 //Excluir um Balanco por ID
 router.delete('/excluir/:id', async (req, res) => {
     try {

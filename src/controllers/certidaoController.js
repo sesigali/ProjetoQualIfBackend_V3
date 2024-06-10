@@ -45,6 +45,20 @@ router.get('/listarcertidao/:id', async (req, res) => {
     }
 });
 
+// Listar todas as certidões de uma empresa por ID da empresa
+router.get('/listarcertidoes/:idEmpresa', async (req, res) => {
+    try {
+        await Certidao.sync();
+        const certidoes = await Certidao.findOne({
+            where: { idEmpresa: req.params.idEmpresa }
+        });
+        res.json(certidoes);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+
+
 //Excluir uma Certidao por ID
 router.delete('/excluir/:id', async (req, res) => {
     try {

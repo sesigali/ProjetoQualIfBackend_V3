@@ -63,6 +63,22 @@ router.get('/listarempresa/:id', async (req, res) => {
     }
 });
 
+// Listar todos usuarios de uma empresa por ID da usuario
+//NÃO ESTÁ FUNCIONANDO
+/*
+router.get('/listarempresas/:idUsuario', async (req, res) => {
+    try {
+        await Empresa.sync();
+        const empresaEntity = await Empresa.findOne({
+            where: { idUsuario: req.params.idUsuario }
+        });
+        res.json(empresaEntity);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+*/
+
 //Excluir uma Empresa por ID
 router.delete('/excluir/:id', async (req, res) => {
     try {

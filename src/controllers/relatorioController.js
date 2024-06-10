@@ -33,6 +33,19 @@ router.get('/relatorio/listarrelatorio/:id', async (req, res) => {
     }
 });
 
+// Listar todos relatorios de uma empresa por ID da empresa
+router.get('/relatorio/listarrelatorios/:idEmpresa', async (req, res) => {
+    try {
+        await Relatorio.sync();
+        const relatorioEntity = await Relatorio.findOne({
+            where: { idEmpresa: req.params.idEmpresa }
+        });
+        res.json(relatorioEntity);
+    } catch (e) {
+        res.status(500).json({ Erro: "Erro no servidor!" });
+    }
+});
+
 //Excluir um Relatório por ID
 router.delete('/relatorio/excluir/:id', async (req, res) => {
     try {

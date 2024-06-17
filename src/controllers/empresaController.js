@@ -1,3 +1,4 @@
+const {Usuario} = require("../models");
 const Empresa = require("../models/index").Empresa;
 const router = require("express").Router();
 
@@ -63,21 +64,18 @@ router.get('/listarempresa/:id', async (req, res) => {
     }
 });
 
-// Listar todos usuarios de uma empresa por ID da usuario
-//NÃO ESTÁ FUNCIONANDO
-/*
-router.get('/listarempresas/:idUsuario', async (req, res) => {
+// Listar todos empresas por ID da usuario
+router.get('/listarempresauser/:id', async (req, res) => {
     try {
         await Empresa.sync();
-        const empresaEntity = await Empresa.findOne({
-            where: { idUsuario: req.params.idUsuario }
+        const empresaEntity = await Empresa.findAll({
+            where: { idUsuario: req.params.id }
         });
         res.json(empresaEntity);
     } catch (e) {
         res.status(500).json({ Erro: "Erro no servidor!" });
     }
 });
-*/
 
 //Excluir uma Empresa por ID
 router.delete('/excluir/:id', async (req, res) => {

@@ -11,7 +11,12 @@ app.use(express.urlencoded({ extended: true }));
 
 (async() => {
   //await db.sync({force:true}) //resetar banco
-  await db.sync();
+  try{
+    await db.sync();
+    console.log('Banco de dados sincronizado.');
+  } catch (error) {
+    console.error('Erro ao sincronizar o banco de dados:', error);
+  }
 })();
 
 app.use("/balanco", require("./controllers/balancoController.js"))
